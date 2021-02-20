@@ -3,7 +3,6 @@
 #include "List.h"
 
 typedef struct node {
-    struct node* previous;
     struct node* next;
     int value;
 } Node;
@@ -13,3 +12,18 @@ struct list {
     Node* start;
     Node* end;
 };
+
+List* createList() {
+    List* list = (List*) malloc (sizeof(List));
+    if (list == NULL) {
+        return NULL;
+    }
+    list->size = 0;
+    list->start = NULL;
+    list->end = NULL;
+    return list;
+}
+
+int emptyList() {
+
+}
