@@ -8,6 +8,7 @@ double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, 
 double Funcao(double x);
 double Derivada(double x);
 double Modulo(double valor);
+int Iteracao();
 
 int main() {
 
@@ -27,13 +28,14 @@ int main() {
     } while (precisao <= 0);
 
     printf("raiz = %lf\n", raiz = MetodoNewton(aproximacao0, aproximacao1, precisao, precisao));
+    printf("O numero de iterações = %d", Iteracao);
 
     return 0;
 }
 
 double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, double precisao2) {
 
-    int interacao = 0;
+    int iteracao = 0;
     double x0 = 0.0, x1 = 0.0;
 
     x0 = ((aproximacao0 + aproximacao1)/2.0);
@@ -42,9 +44,10 @@ double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, 
         return x0;
     }
 
-    interacao = 1;
+    iteracao = 1;
+
     
-    while (interacao <= CONST) {
+    while (iteracao <= CONST) {
 
         x1 = (x0 - (Funcao(x0)/Derivada(x0)));
 
@@ -54,7 +57,8 @@ double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, 
 
         x0 = x1;
         
-        ++interacao;
+        ++iteracao;
+        Iteracao();
     }
     
     return x1;
@@ -101,4 +105,9 @@ double Modulo(double valor) {
     } else {
         return valor;
     }
+}
+
+int Iteracao() {
+    int i = 1;
+    return i++;
 }
