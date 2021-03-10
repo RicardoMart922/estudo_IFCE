@@ -1,23 +1,28 @@
+#include <windows.h>
 #include <stdio.h>
 #include <math.h>
 
 #define CONST 100
 #define N 1000
 
-double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, double precisao2);
+double MetodoNewton(double a, double b, double precisao);
 double Funcao(double x);
 double Derivada(double x);
 double Modulo(double valor);
 int Iteracao();
 
 int main() {
+    UINT CPAGE_UTF8 = 65001;
+    UINT CPAGE_DEFAULT = GetConsoleOutputCP();
+    SetConsoleOutputCP(CPAGE_UTF8);
 
-    double aproximacao0 = 0.0, aproximacao1 = 0.0, precisao = 0.0, raiz = 0.0;
+    double a = 0.0, b = 0.0, precisao = 0.0, raiz = 0.0;
+    int i = 0;
 
     printf("Digite o valor de a: ");
-    scanf("%lf", &aproximacao0);
+    scanf("%lf", &a);
     printf("Digite o valor de b: ");
-    scanf("%lf", &aproximacao1);
+    scanf("%lf", &b);
 
     do {
         printf("Digite o valor da precisão: ");
@@ -27,20 +32,20 @@ int main() {
         }
     } while (precisao <= 0);
 
-    printf("raiz = %lf\n", raiz = MetodoNewton(aproximacao0, aproximacao1, precisao, precisao));
-    printf("O numero de iterações = %d", Iteracao);
+    printf("raiz = %lf\n", raiz = MetodoNewton(a, b, precisao));
+    printf("O numero de iterações = %d", i = Iteracao());
 
     return 0;
 }
 
-double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, double precisao2) {
+double MetodoNewton(double a, double b, double precisao) {
 
     int iteracao = 0;
     double x0 = 0.0, x1 = 0.0;
 
-    x0 = ((aproximacao0 + aproximacao1)/2.0);
+    x0 = ((a + b)/2.0);
 
-    if (Modulo(Funcao(x0)) < precisao1) {
+    if (Modulo(Funcao(x0)) < precisao) {
         return x0;
     }
 
@@ -51,7 +56,7 @@ double MetodoNewton(double aproximacao0, double aproximacao1, double precisao1, 
 
         x1 = (x0 - (Funcao(x0)/Derivada(x0)));
 
-        if (Modulo(Funcao(x1) < precisao1 || Modulo(x1 - x0) < precisao2)) {
+        if (Modulo(Funcao(x1) < precisao || Modulo(x1 - x0) < precisao)) {
             return x1;
         }
 
