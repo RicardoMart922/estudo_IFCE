@@ -40,7 +40,7 @@ int main() {
             a = c;
         }
     }
-    printf("raiz = %lf\n", raiz);
+    printf("Raiz = %lf\n", raiz);
     printf("Nº interações = %d\n", i);
     return 1;
 }
