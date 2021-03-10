@@ -19,14 +19,9 @@ int main() {
     scanf("%lf", &a);
     printf("Digite o valor de b: ");
     scanf("%lf", &b);
+    printf("Digite o valor da precisão: ");
+    scanf("%lf", &precisao);
 
-    do {
-        printf("Digite a precisão: ");
-        scanf("%lf", &precisao);
-        if (precisao < 0) {
-            printf("Error.\n");
-        }
-    } while (precisao <= 0);
 
     while (i < MAX) {
 
