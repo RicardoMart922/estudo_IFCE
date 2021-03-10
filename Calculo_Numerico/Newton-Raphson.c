@@ -113,6 +113,7 @@ double Modulo(double valor) {
 }
 
 int Iteracao() {
-    int i = 1;
-    return i++;
+    int i = 0;
+    i = i + 1;
+    return i;
 }
