@@ -15,7 +15,7 @@ int main() {
     SetConsoleOutputCP(CPAGE_UTF8);
 
     double a = 0.0, b = 0.0, precisao = 0.0, raiz = 0.0, x0 = 0.0, x1 = 0.0;
-    int iteracao = 0;
+    int iteracao = 1;
 
     printf("Interval [a, b]\n");
     printf("Digite o valor de a: ");

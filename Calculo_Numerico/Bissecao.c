@@ -3,6 +3,7 @@
 #include <math.h>
 
 #define MAX 100
+#define N 1000
 
 double Funcao(double x);
 
@@ -12,7 +13,7 @@ int main() {
     SetConsoleOutputCP(CPAGE_UTF8);
 
     double a = 0.0, b = 0.0, precisao = 0.0, raiz = 0.0, c = 0.0;
-    int i = 0;
+    int i = 1;
 
     printf("Intervalo [a, b]\n");
     printf("Digite o valor de a: ");
@@ -22,13 +23,13 @@ int main() {
     printf("Digite o valor da precisão: ");
     scanf("%lf", &precisao);
 
-
     while (i < MAX) {
 
         c = ((b + a) / 2);
 
         if (Funcao(c) == 0 || ((b - a) / 2) < precisao) {
             raiz = c;
+            printf("Raiz = %lf\n", raiz);
             break;
         }
     
@@ -40,8 +41,9 @@ int main() {
             a = c;
         }
     }
-    printf("Raiz = %lf\n", raiz);
+
     printf("Nº interações = %d\n", i);
+
     return 1;
 }
 
@@ -52,7 +54,7 @@ double Funcao(double x) {
     int i = 0, j = 0;
     double fat = 0.0, E = 1.0;
     /*Número de Euler*/
-    for (i = 1; i <= MAX; i++) {
+    for (i = 1; i <= N; i++) {
         fat = 1;
         for (j = 1; j <= i; j++) {
             fat = fat * j;
