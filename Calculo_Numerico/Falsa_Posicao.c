@@ -30,25 +30,25 @@ int main() {
     int i = 1;
 
     printf("Interval [a, b]\n");
-    printf("-=--=--=--=--=--=--=--=--=--=--=--=-");
+    printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
     printf("Digite o valor de a: ");
     scanf("%lf", &a);
     printf("Digite o valor de b: ");
     scanf("%lf", &b);
     printf("Digite o valor da precisão: ");
     scanf("%lf", &precisao);
-    printf("-=--=--=--=--=--=--=--=--=--=--=--=-");
+    printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
     
     while (i <= MAX) {
 
         x = (((a * Funcao(b)) - (b * Funcao(a))) / (Funcao(b) - Funcao(a)));
 
-        if (Modulo(Funcao(x)) < precisao) { /* 1º caso: f(x) = 0 */
+        i++;
+
+        if (Modulo(Funcao(x)) <= precisao) { /* 1º caso: |f(x)| <= 0 */
             printf("Raiz = %lf\n", x);
             break;
         }
-
-        i++;
         
         if (Funcao(a) * Funcao(x) < 0) {  /* 2º caso: f(a) * f(x) < 0 */
             b = x;
