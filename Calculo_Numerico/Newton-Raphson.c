@@ -20,13 +20,14 @@
 double Funcao(double x);
 double Derivada(double x);
 double Modulo(double valor);
+void Imprimir(int i, double a, double b, double x0, double x1, double erro);
 
 int main() {
     UINT CPAGE_UTF8 = 65001;
     UINT CPAGE_DEFAULT = GetConsoleOutputCP();
     SetConsoleOutputCP(CPAGE_UTF8);
 
-    double a = 0.0, b = 0.0, precisao = 0.0, x0 = 0.0, x1 = 0.0;
+    double a = 0.0, b = 0.0, precisao = 0.0, x0 = 0.0, x1 = 0.0, erro = 0.0;
     int i = 1;
 
     printf("Interval [a, b]\n");
@@ -38,6 +39,7 @@ int main() {
     printf("Digite o valor da precisão: ");
     scanf("%lf", &precisao);
     printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
+    printf("nº|  a |  b |    x_n    |   x_n+1   |   erro   |\n");
 
     x0 = ((a+b) / 2.0);  /* Escolhendo um x0 */
 
@@ -45,17 +47,21 @@ int main() {
 
         x1 = (x0 - (Funcao(x0) / Derivada(x0)));  /* Encontrando um possível cadidato para ser raíz */
         
-        i++;
+        erro = Modulo(x1 - x0);
+
+        Imprimir(i, a, b, x0, x1, erro);
         
-        if ((Modulo(x1 - x0) <= precisao)) { /* Verificação da precisão */
+        if ((erro <= precisao)) { /* Verificação da precisão */
             printf("raiz = %lf\n", x1);
             break;
         }
    
         x0 = x1;
+
+        i++;
     }
     
-    printf("Nº de iterações = %d", i);
+    printf("Nº de iterações = %d\n", i);
 
     return 0;
 }
@@ -100,4 +106,8 @@ double Modulo(double valor) {
     } else {
         return valor;
     }
+}
+
+void Imprimir(int i, double a, double b, double x0, double x1, double erro) {
+    printf("%d | %.0lf | %.0lf | %.6lf | %.6lf | %.6lf |\n", i, a, b, x0, x1, erro);
 }
