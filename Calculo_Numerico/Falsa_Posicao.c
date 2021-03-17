@@ -89,8 +89,7 @@ double Funcao(double x) {
 
 double Modulo(double valor) {
     if (valor < 0) {
-        valor = (valor * (-1));
-        return valor;
+        return valor* (-1);
     } else {
         return valor;
     }
