@@ -20,8 +20,9 @@
 double Funcao(double x);
 double Derivada(double x);
 double Modulo(double valor);
-void Imprimir(int i, double a, double b, double x0, double x1, double erro);
+void Imprimir( double a, double b, double x0, double x1, double erro, int i);
 
+/* Módulo principal */
 int main() {
     UINT CPAGE_UTF8 = 65001;
     UINT CPAGE_DEFAULT = GetConsoleOutputCP();
@@ -41,17 +42,17 @@ int main() {
     printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
     printf("nº|  a |  b |    x_n    |   x_n+1   |   erro   |\n");
 
-    x0 = ((a+b) / 2.0);  /* Escolhendo um x0 */
+    x0 = ((a + b) / 2.0);  
 
     while (i <= MAX) {
 
-        x1 = (x0 - (Funcao(x0) / Derivada(x0)));  /* Encontrando um possível cadidato para ser raíz */
-        
+        x1 = (x0 - (Funcao(x0) / Derivada(x0)));  
+    
         erro = Modulo(x1 - x0);
 
-        Imprimir(i, a, b, x0, x1, erro);
+        Imprimir(a, b, x0, x1, erro, i);
         
-        if ((erro <= precisao)) { /* Verificação da precisão */
+        if ((Modulo(x1 - x0) <= precisao)) { 
             printf("raiz = %lf\n", x1);
             break;
         }
@@ -108,6 +109,6 @@ double Modulo(double valor) {
     }
 }
 
-void Imprimir(int i, double a, double b, double x0, double x1, double erro) {
+void Imprimir(double a, double b, double x0, double x1, double erro, int i) {
     printf("%d | %.0lf | %.0lf | %.6lf | %.6lf | %.6lf |\n", i, a, b, x0, x1, erro);
 }

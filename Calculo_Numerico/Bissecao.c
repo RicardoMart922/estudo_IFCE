@@ -16,8 +16,10 @@
 #define MAX 50
 #define N 1000
 
-/* Módulo auxiliar */
+/* Módulos auxiliares */
 double Funcao(double x);
+double Modulo(double valor);
+void Imprimir(int i, double a, double b, double x, double fa, double fb, double fx, double erro);
 
 /* Módulo principal */
 int main() {
@@ -25,7 +27,7 @@ int main() {
     UINT CPAGE_DEFAULT = GetConsoleOutputCP();
     SetConsoleOutputCP(CPAGE_UTF8);
 
-    double a = 0.0, b = 0.0, precisao = 0.0, raiz = 0.0, p = 0.0;
+    double a = 0.0, b = 0.0, precisao = 0.0, raiz = 0.0, p = 0.0, p0 = 0.0, erro = 0.0;
     int i = 1;
 
     printf("Interval [a, b]\n");
@@ -37,26 +39,33 @@ int main() {
     printf("Digite o valor da precisão: ");
     scanf("%lf", &precisao);
     printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
+    printf("nº |     a     |     b     |    x_n    |    f(a)   |   f(b)   |   f(x_n)  |   erro   |\n");
 
     while (i <= MAX) {
 
         p = ((a + b) / 2.0);
         
-        if (Funcao(p) == 0 || ((b - a) / 2.0) < precisao) { /* 1º caso: f(p) = 0 */
+        erro = Modulo(p - p0);
+
+        Imprimir(i, a, b, p, Funcao(a), Funcao(b), Funcao(p), erro);
+
+        if (erro <= precisao) { 
             printf("Raiz = %lf\n", p);
             break;
         }
-    
+
         i++; 
+
+        p0 = p;
         
-        if (Funcao(p) * Funcao(a) < 0) { /* 2º caso: f(a) * f(p) < 0 */
+        if (Funcao(p) * Funcao(a) < 0) { 
             b = p;
-        } else {                         /* 3º caso: f(p) * f(b) < 0 */
+        } else {                         
             a = p;
         }
     }
 
-    printf("nº interações = %d\n", i);
+    printf("Nº interações = %d\n", i);
 
     return 1;
 }
@@ -76,4 +85,22 @@ double Funcao(double x) {
         E = (E + (1.0/fat));
     }
     return pow(E, x) - pow(cos(x), 2);
+}
+
+double Modulo(double valor) {
+    if (valor < 0) {
+        return valor * (-1);
+    } else {
+        return valor;
+    }
+}
+
+void Imprimir(int i, double a, double b, double x, double fa, double fb, double fx, double erro) {
+    if (i == 1) {
+        printf(" %i | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf |     -    |\n", i, a, b, x, fa, fb, fx);
+    }else if (i < 10) {
+        printf(" %i | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf |\n", i, a, b, x, fa, fb, fx, erro);
+    } else {
+        printf("%i | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf |\n", i, a, b, x, fa, fb, fx, erro);
+    }
 }

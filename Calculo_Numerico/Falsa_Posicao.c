@@ -19,6 +19,7 @@
 /* Módulos auxiliares */
 double Funcao(double x);
 double Modulo(double valor);
+void Imprimir(int i, double a, double b, double x, double fa, double fb, double fx, double erro);
 
 /* Módulo principal */
 int main() {
@@ -26,7 +27,7 @@ int main() {
     UINT CPAGE_DEFAULT = GetConsoleOutputCP();
     SetConsoleOutputCP(CPAGE_UTF8);
 
-    double a = 0.0, b = 0.0, precisao = 0.0, x = 0.0;
+    double a = 0.0, b = 0.0, precisao = 0.0, x = 0.0, x0 = 0.0, erro = 0.0;
     int i = 1;
 
     printf("Interval [a, b]\n");
@@ -38,26 +39,33 @@ int main() {
     printf("Digite o valor da precisão: ");
     scanf("%lf", &precisao);
     printf("-=--=--=--=--=--=--=--=--=--=--=--=-\n");
+    printf("nº |     a     |     b     |    x_n    |    f(a)   |   f(b)   |  f(x_n)  |   erro   |\n");
     
     while (i <= MAX) {
 
         x = (((a * Funcao(b)) - (b * Funcao(a))) / (Funcao(b) - Funcao(a)));
 
-        i++;
-
-        if (Modulo(Funcao(x)) <= precisao) { /* 1º caso: |f(x)| <= 0 */
+        erro = Modulo(x - x0);
+        
+        Imprimir(i, a, b, x, Funcao(a), Funcao(b), Funcao(x), erro);
+        
+        if (erro <= precisao) {              
             printf("Raiz = %lf\n", x);
             break;
         }
+
+        i++;
+
+        x0 = x;
         
-        if (Funcao(a) * Funcao(x) < 0) {  /* 2º caso: f(a) * f(x) < 0 */
+        if (Funcao(a) * Funcao(x) < 0) {  
             b = x;
-        } else {                          /* 3º caso: f(x) * f(b) < 0 */
+        } else {                          
             a = x;
         }
     }
 
-    printf("nº interações = %d\n", i);
+    printf("Nº interações = %d\n", i);
 
     return 0;
 }
@@ -85,5 +93,13 @@ double Modulo(double valor) {
         return valor;
     } else {
         return valor;
+    }
+}
+
+void Imprimir(int i, double a, double b, double x, double fa, double fb, double fx, double erro) {
+    if (i == 1) {
+        printf(" %i | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf |     -    |\n", i, a, b, x, fa, fb, fx);
+    }else {
+        printf(" %i | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf | %.6lf |\n", i, a, b, x, fa, fb, fx, erro);
     }
 }
