@@ -8,10 +8,10 @@ portanto, não é necessário se preocupar com validações.
 int main() {
     float numero1 = 0.0, numero2 = 0.0, divisao = 0.0;
         
-    printf("Digite um número: ");
+    printf("Digite um numero: ");
     scanf("%f", &numero1);
 
-    printf("Digite outro número: ");
+    printf("Digite outro numero: ");
     scanf("%f", &numero2);
         
     divisao = numero1 / numero2;

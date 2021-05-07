@@ -11,15 +11,15 @@ e a mensagem que se encontra na tabela a seguir:
 int main() {
     float nota1 = 0.00, nota2 = 0.00, media = 0.00;
         
-    printf("1º nota: ");
+    printf("Primeira nota: ");
     scanf("%f", &nota1);
         
-    printf("2º nota: ");
+    printf("Segunda nota: ");
     scanf("%f", &nota2);
         
     media = (nota1 + nota2) / 2;
         
-    printf("Média = %.2f\n", media);
+    printf("Media = %.2f\n", media);
         
     if (media >= 0.0 && media < 3.0) {
         printf("Reprovado!\n");
